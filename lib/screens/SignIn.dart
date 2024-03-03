@@ -51,7 +51,7 @@ class SingInPageState extends State<SignInPage> {
         _showErrorSnackBar(context, 'Invalid credentials. Please try again.');
       } else {
         // Handle other FirebaseAuthException
-        _showErrorSnackBar(context, 'Authentication failed. ${e.message}');
+        _showErrorSnackBar(context, 'Invalied Username or Password');
       }
     } on FirebaseException catch (e) {
       // Handle other FirebaseException
