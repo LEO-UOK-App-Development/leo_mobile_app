@@ -66,7 +66,7 @@ class ProjectPageState extends State<ProjectPage> {
                       maxWidth: screenWidth * 0.4,
                     ),
                     child: Text(
-                      'Projects of Leo Club Of UOK',
+                      'Projects Of Leo Club Of UOK',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: screenWidth * 0.04,

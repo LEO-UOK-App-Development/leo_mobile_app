@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uokleo/screens/SignIn.dart';
 import 'package:uokleo/screens/admin.dart';
+import 'package:uokleo/screens/board.dart';
 import './screens/EventPage.dart';
 import './screens/BlogPage.dart';
 import './screens/Projects.dart';
@@ -19,6 +20,7 @@ class _NavBarState extends State<NavBar> {
     ProjectPage(),
     EventPage(),
     AdminPage(),
+    BoardPage(),
   ];
 
   @override
@@ -38,7 +40,7 @@ class _NavBarState extends State<NavBar> {
               Color.fromARGB(255, 247, 223, 2), // Set the background color here
           elevation: 0, // Set elevation to 0
           onTap: (index) {
-            if (index == 4) {
+            if (index == 5) {
               // Logout action
               _signOut();
             } else {
@@ -69,7 +71,12 @@ class _NavBarState extends State<NavBar> {
               backgroundColor: Color.fromARGB(255, 247, 223, 2),
             ),
             BottomNavigationBarItem(
-              icon: buildIconWithBox(Icons.logout, 4),
+              icon: buildIconWithBox(Icons.people_alt_outlined, 4),
+              label: 'board',
+              backgroundColor: Color.fromARGB(255, 247, 223, 2),
+            ),
+            BottomNavigationBarItem(
+              icon: buildIconWithBox(Icons.logout, 5),
               label: 'Logout',
               backgroundColor: Color.fromARGB(255, 247, 223, 2),
             ),
