@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -75,8 +77,7 @@ class _EventPageState extends State<EventPage> {
                     left: 0.05 * screenWidth,
                     top: 0.1 * screenWidth,
                     child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/download.jpeg'),
+                      backgroundImage: AssetImage('assets/images/logo.PNG'),
                       radius: 0.1 * screenWidth,
                     ),
                   ),
@@ -110,72 +111,82 @@ class _EventPageState extends State<EventPage> {
                 ),
               ],
             ),
-            TableCalendar(
-              calendarFormat: _calendarController.calendarFormat,
-              calendarStyle: CalendarStyle(
-                todayDecoration: BoxDecoration(
-                  color: Colors.yellowAccent,
-                  shape: BoxShape.circle,
+            SingleChildScrollView(
+              child: TableCalendar(
+                calendarFormat: _calendarController.calendarFormat,
+                calendarStyle: CalendarStyle(
+                  todayDecoration: BoxDecoration(
+                    color: Colors.yellowAccent,
+                    shape: BoxShape.circle,
+                  ),
+                  selectedDecoration: BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                  ),
+                  selectedTextStyle: TextStyle(color: Colors.white),
+                  todayTextStyle: TextStyle(color: Colors.black),
+                  markersMaxCount: 5,
                 ),
-                selectedDecoration: BoxDecoration(
-                  color: Colors.blue,
-                  shape: BoxShape.circle,
+                headerStyle: HeaderStyle(
+                  formatButtonVisible: false,
+                  titleTextStyle: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                selectedTextStyle: TextStyle(color: Colors.white),
-                todayTextStyle: TextStyle(color: Colors.black),
-                markersMaxCount: 5,
+                focusedDay: _selectedDay,
+                firstDay: DateTime(2023, 1, 1),
+                lastDay: DateTime(2025, 12, 31),
+                onDaySelected: (selectedDay, focusedDay) {
+                  setState(() {
+                    _selectedDay = selectedDay;
+                  });
+                },
               ),
-              headerStyle: HeaderStyle(
-                formatButtonVisible: false,
-                titleTextStyle: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              focusedDay: _selectedDay,
-              firstDay: DateTime(2023, 1, 1),
-              lastDay: DateTime(2025, 12, 31),
-              onDaySelected: (selectedDay, focusedDay) {
-                setState(() {
-                  _selectedDay = selectedDay;
-                });
-              },
             ),
-            FutureBuilder(
-              future: _getEvents(_selectedDay),
-              builder: (context,
-                  AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Text(
-                    'No events for the selected day.',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                } else {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      Map<String, dynamic> event = snapshot.data![index];
-                      return ListTile(
-                        title: Text(
-                          'Project Name: ${event['projectName']}',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+            SingleChildScrollView(
+              child: FutureBuilder(
+                future: _getEvents(_selectedDay),
+                builder: (context,
+                    AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'No events for the selected day.',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        subtitle: Text(
-                          'Start Time: ${event['startTime']}',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      );
-                    },
-                  );
-                }
-              },
+                      ),
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          Map<String, dynamic> event = snapshot.data![index];
+                          return ListTile(
+                            title: Text(
+                              'Project Name: ${event['projectName']}',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(
+                              'Start Time: ${event['startTime']}',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           ],
         ),

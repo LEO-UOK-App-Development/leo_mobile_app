@@ -49,7 +49,7 @@ class SignUpPageState extends State<SignUpPage> {
                 20, MediaQuery.of(context).size.height * 0.07, 20, 0),
             child: Column(
               children: <Widget>[
-                logoWidget("assets/images/download.jpeg"),
+                logoWidget("assets/images/logo.PNG"),
                 Text(
                   "LEO CLUB OF UNIVERSITY OF KELANIYA",
                   style: TextStyle(

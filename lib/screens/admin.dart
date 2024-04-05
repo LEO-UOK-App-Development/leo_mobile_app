@@ -45,38 +45,43 @@ class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/download.jpeg',
-                width: 120.0,
-                height: 120.0,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(height: 20.0),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 150),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/logo.PNG',
+                  width: 120.0,
+                  height: 120.0,
+                  fit: BoxFit.cover,
                 ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: _login,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 247, 223, 2),
+                SizedBox(height: 20.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                    ),
+                  ),
                 ),
-                child: Text(
-                  'Admin Login',
-                  style: TextStyle(color: Colors.black),
+                SizedBox(height: 20.0),
+                ElevatedButton(
+                  onPressed: _login,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 247, 223, 2),
+                  ),
+                  child: Text(
+                    'Admin Login',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

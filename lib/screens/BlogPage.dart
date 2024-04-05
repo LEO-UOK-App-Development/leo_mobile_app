@@ -43,7 +43,7 @@ class _BlogPageState extends State<BlogPage> {
                   left: 0.05 * screenWidth,
                   top: 0.1 * screenWidth,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/download.jpeg'),
+                    backgroundImage: AssetImage('assets/images/logo.PNG'),
                     radius: 0.1 * screenWidth,
                   ),
                 ),
@@ -129,52 +129,58 @@ class BlogItemWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(0.02 * screenWidth),
       child: Card(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Image.network(
-              imagePath,
-              height: 280,
-              fit: BoxFit.fill,
-            ),
-            Padding(
-              padding: EdgeInsets.all(0.04 * screenWidth),
-              child: SelectableText(
-                // Wrap with SelectableText
-                blogTitle,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 0.05 * screenWidth,
-                  color: Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.network(
+                imagePath,
+                height: 280,
+                fit: BoxFit.fill,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: .04 * screenWidth,
+                  vertical: 10,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(0.04 * screenWidth),
-              child: Text(
-                blogText,
-                maxLines: 2, // Display only 2 lines initially
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    _showLearnMoreDialog(context, blogText);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 23, 187, 29)),
-                  child: Text(
-                    'Learn more',
-                    style: TextStyle(color: Colors.white),
+                child: SelectableText(
+                  // Wrap with SelectableText
+                  blogTitle,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 0.05 * screenWidth,
+                    color: Colors.black,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
-          ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(0.04 * screenWidth),
+                child: Text(
+                  blogText,
+                  maxLines: 2, // Display only 2 lines initially
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _showLearnMoreDialog(context, blogText);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 23, 187, 29)),
+                    child: Text(
+                      'Learn more',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

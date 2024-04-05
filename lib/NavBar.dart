@@ -19,8 +19,8 @@ class _NavBarState extends State<NavBar> {
     BlogPage(),
     ProjectPage(),
     EventPage(),
-    AdminPage(),
     BoardPage(),
+    AdminPage(),
   ];
 
   @override
@@ -42,7 +42,7 @@ class _NavBarState extends State<NavBar> {
           onTap: (index) {
             if (index == 5) {
               // Logout action
-              _signOut();
+              _signOut(context);
             } else {
               setState(() {
                 _currentIndex = index;
@@ -86,16 +86,41 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  Future<void> _signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => SignInPage()),
-      );
-    } catch (e) {
-      print('Error during sign out: $e');
-      // Handle sign-out error if necessary
+  Future<void> _signOut(BuildContext context) async {
+    bool confirmLogout = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Confirm Logout"),
+          content: Text("Are you sure?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text("Yes"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text("No"),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmLogout == true) {
+      try {
+        await FirebaseAuth.instance.signOut();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => SignInPage()),
+        );
+      } catch (e) {
+        print('Error during sign out: $e');
+      }
     }
   }
 

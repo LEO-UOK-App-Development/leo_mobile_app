@@ -154,7 +154,7 @@ class SingInPageState extends State<SignInPage> {
                 20, MediaQuery.of(context).size.height * 0.1, 20, 0),
             child: Column(
               children: <Widget>[
-                logoWidget("assets/images/download.jpeg"),
+                logoWidget("assets/images/logo.PNG"),
                 Text(
                   "LEO CLUB OF UNIVERSITY OF KELANIYA",
                   style: TextStyle(
@@ -174,7 +174,7 @@ class SingInPageState extends State<SignInPage> {
                   decoration: InputDecoration(
                     labelText: "Enter Username",
                     prefixIcon: Icon(Icons.person_outline),
-                    fillColor: Colors.black.withOpacity(0.3),
+                    fillColor: Colors.black.withOpacity(0.1),
                     filled: true,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -200,7 +200,7 @@ class SingInPageState extends State<SignInPage> {
                   ),
                   decoration: InputDecoration(
                     labelText: "Enter Password",
-                    fillColor: Colors.black.withOpacity(0.3),
+                    fillColor: Colors.black.withOpacity(0.1),
                     filled: true,
                     prefixIcon: Icon(Icons.lock_outline),
                     suffixIcon: IconButton(

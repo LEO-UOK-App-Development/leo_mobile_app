@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Authentication
 import 'package:uokleo/HomePage.dart';
 import 'package:uokleo/screens/SignIn.dart';
 
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
                 opacity: 1,
                 duration: Duration(seconds: 1),
                 child: Image.asset(
-                  'assets/images/download.jpeg',
+                  'assets/images/logo.PNG',
                   height: 150,
                   width: 150,
                 ),
